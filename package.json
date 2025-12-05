@@ -1,0 +1,15 @@
+{
+  "name": "todt-chatwidget",
+  "version": "1.0.0",
+  "description": "Doggy Dan AI Chat Widget",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=18.x"
+  }
+}
