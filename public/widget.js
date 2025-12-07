@@ -102,6 +102,14 @@
     let isChatOpen = false;
 
     bubble.addEventListener('click', () => {
+      // If in fullscreen mode, exit fullscreen instead of closing widget
+      if (widget.classList.contains('fullscreen')) {
+        widget.classList.remove('fullscreen');
+        bubble.classList.remove('moved-top');
+        expandBtn.textContent = '⤢';
+        return;
+      }
+
       isChatOpen = !isChatOpen;
       if (isChatOpen) {
         widget.classList.add('open');
