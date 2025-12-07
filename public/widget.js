@@ -189,7 +189,7 @@
       if (el) el.remove();
     }
 
-    async function streamText(messageElement, text, speed = 15) {
+    async function streamText(messageElement, text, speed = 3) {
       messageElement.textContent = '';
       let accumulatedText = '';
 
