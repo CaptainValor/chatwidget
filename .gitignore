@@ -5,3 +5,4 @@ node_modules/
 *.jpg
 *.png
 !public/*.png
+public/doggy-dan-chatbot-icon.png
