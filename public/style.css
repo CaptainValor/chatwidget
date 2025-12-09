@@ -1,25 +1,26 @@
-body {
-  margin: 0;
-  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Helvetica, Arial, sans-serif;
-  overflow-x: hidden;
+/* Widget-specific body class to avoid conflicts with WordPress */
+body.chat-open {
+  /* Only apply when chat is open if needed */
 }
 
 #chat-bubble {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 60px;
-  height: 60px;
-  background: #1976d2;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  z-index: 99999;
-  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  position: fixed !important;
+  bottom: 30px !important;
+  right: 30px !important;
+  width: 60px !important;
+  height: 60px !important;
+  background: #1976d2 !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+  z-index: 99999 !important;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 #chat-bubble:hover {
@@ -61,29 +62,33 @@ body {
 }
 
 .chat-widget {
-  position: fixed;
-  bottom: 110px;
-  right: 30px;
-  width: 33vw;
-  min-width: 450px;
-  max-width: 800px;
-  height: 750px;
-  max-height: 80vh;
-  background: #ffffff;
-  border-radius: 20px;
-  display: none;
-  flex-direction: column;
-  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
-  z-index: 9999;
-  opacity: 0;
-  transform: translateY(20px) scale(0.95);
-  transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+  position: fixed !important;
+  bottom: 110px !important;
+  right: 30px !important;
+  width: 33vw !important;
+  min-width: 450px !important;
+  max-width: 800px !important;
+  height: 750px !important;
+  max-height: 80vh !important;
+  background: #ffffff !important;
+  border-radius: 20px !important;
+  display: none !important;
+  flex-direction: column !important;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2) !important;
+  z-index: 9999 !important;
+  opacity: 0 !important;
+  transform: translateY(20px) scale(0.95) !important;
+  transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
 }
 
 .chat-widget.open {
-  display: flex;
-  opacity: 1;
-  transform: translateY(0) scale(1);
+  display: flex !important;
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
 }
 
 .chat-widget.fullscreen {
