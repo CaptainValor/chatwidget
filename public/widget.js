@@ -160,11 +160,9 @@
       const div = document.createElement('div');
       div.className = 'message ' + sender;
 
-      if (sender === 'bot') {
-        div.textContent = text;
-      } else {
-        div.textContent = text;
-      }
+      // Use innerHTML to decode HTML entities (like &#x1f44b; to 👋)
+      // This preserves emojis in both user and bot messages
+      div.innerHTML = text;
 
       messages.appendChild(div);
       messages.scrollTop = messages.scrollHeight;
