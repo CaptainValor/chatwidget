@@ -156,13 +156,19 @@
       return addMessage(text, 'bot');
     }
 
+    function decodeHtmlEntities(text) {
+      const textarea = document.createElement('textarea');
+      textarea.innerHTML = text;
+      return textarea.value;
+    }
+
     function addMessage(text, sender) {
       const div = document.createElement('div');
       div.className = 'message ' + sender;
 
-      // Use innerHTML to decode HTML entities (like &#x1f44b; to 👋)
-      // This preserves emojis in both user and bot messages
-      div.innerHTML = text;
+      // Decode HTML entities first (like &#x1f44b; to 👋)
+      const decodedText = decodeHtmlEntities(text);
+      div.textContent = decodedText;
 
       messages.appendChild(div);
       messages.scrollTop = messages.scrollHeight;
