@@ -10,6 +10,18 @@ app.use((req, res, next) => {
   next();
 });
 
+// Add cache control for widget files (short cache, always revalidate)
+app.use((req, res, next) => {
+  if (req.path.endsWith('.js') || req.path.endsWith('.html') || req.path.endsWith('.css')) {
+    // Cache for 5 minutes but always revalidate
+    res.setHeader('Cache-Control', 'public, max-age=300, must-revalidate');
+  } else if (req.path.match(/\.(png|jpg|jpeg|gif|svg)$/)) {
+    // Images can cache longer (1 day)
+    res.setHeader('Cache-Control', 'public, max-age=86400');
+  }
+  next();
+});
+
 // Serve static files
 app.use(express.static('public'));
 
