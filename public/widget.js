@@ -15,6 +15,8 @@
 
   // Initialize when DOM is ready
   function init() {
+    console.log('[Doggy Widget] Initializing...');
+
     // Create host element
     const host = document.createElement('div');
     host.id = 'doggy-chat-widget-host';
@@ -22,11 +24,19 @@
 
     // Attach Shadow DOM
     const shadow = host.attachShadow({ mode: 'open' });
+    console.log('[Doggy Widget] Shadow DOM attached');
+
+    // Add Google Fonts to shadow DOM first
+    const fontLink = document.createElement('link');
+    fontLink.rel = 'stylesheet';
+    fontLink.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap';
+    shadow.appendChild(fontLink);
 
     // Fetch and inject CSS
     fetch(baseUrl + '/style.css')
       .then(response => response.text())
       .then(css => {
+        console.log('[Doggy Widget] CSS loaded');
         const style = document.createElement('style');
         style.textContent = css;
         shadow.appendChild(style);
@@ -36,6 +46,7 @@
       })
       .then(response => response.text())
       .then(html => {
+        console.log('[Doggy Widget] HTML loaded');
         // Parse HTML to extract body content only
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
@@ -55,10 +66,11 @@
         shadow.appendChild(bodyContent);
 
         // Now execute the widget JavaScript in the context of the shadow DOM
+        console.log('[Doggy Widget] Initializing widget script...');
         initWidget(shadow, baseUrl);
       })
       .catch(error => {
-        console.error('Failed to load Doggy Chat Widget:', error);
+        console.error('[Doggy Widget] Failed to load:', error);
       });
   }
 
@@ -76,12 +88,21 @@
     }
 
     const chatId = getChatId();
-    const bubble = shadow.getElementById("chat-bubble");
-    const widget = shadow.getElementById("chatWidget");
-    const sendBtn = shadow.getElementById("sendBtn");
-    const input = shadow.getElementById("user-input");
-    const messages = shadow.getElementById("chat-messages");
-    const expandBtn = shadow.getElementById("expandChatBtn");
+    const bubble = shadow.querySelector("#chat-bubble");
+    const widget = shadow.querySelector("#chatWidget");
+    const sendBtn = shadow.querySelector("#sendBtn");
+    const input = shadow.querySelector("#user-input");
+    const messages = shadow.querySelector("#chat-messages");
+    const expandBtn = shadow.querySelector("#expandChatBtn");
+
+    console.log('[Doggy Widget] Elements found:', {
+      bubble: !!bubble,
+      widget: !!widget,
+      sendBtn: !!sendBtn,
+      input: !!input,
+      messages: !!messages,
+      expandBtn: !!expandBtn
+    });
 
     const chatIconSVG = `
       <svg viewBox="0 0 24 24"><path d="M12 3C6.48 3 2 6.92 2 12c0 2.38 1.05 4.52 2.81 6.17L4 22l4.2-1.82c1.04.29 2.13.45 3.27.45 5.52 0 10-3.92 10-9s-4.48-9-10-9z"/></svg>
@@ -108,7 +129,7 @@
         bubble.innerHTML = closeIconSVG;
 
         if (messages.children.length === 0) {
-          addBotMessage("Hey! 👋 Need help with your dog?");
+          addBotMessage("Hey! \uD83D\uDC4B Need help with your dog?");
         }
         input.focus();
       } else {
@@ -168,7 +189,7 @@
     }
 
     function hideTypingDots() {
-      const el = shadow.getElementById("typingDots");
+      const el = shadow.querySelector("#typingDots");
       if (el) el.remove();
     }
 
