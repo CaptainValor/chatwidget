@@ -62,6 +62,15 @@
         const styles = bodyContent.querySelectorAll('style');
         styles.forEach(style => style.remove());
 
+        // Fix image paths to use absolute URLs
+        const images = bodyContent.querySelectorAll('img');
+        images.forEach(img => {
+          const src = img.getAttribute('src');
+          if (src && !src.startsWith('http://') && !src.startsWith('https://')) {
+            img.setAttribute('src', baseUrl + '/' + src);
+          }
+        });
+
         // Append the HTML to shadow DOM
         shadow.appendChild(bodyContent);
 
