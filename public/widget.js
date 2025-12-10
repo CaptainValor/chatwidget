@@ -159,11 +159,23 @@
 
     function renderMarkdown(markdownText) {
       let html = markdownText;
+
+      // Headers (h1-h6) - convert to bold without the hashes
+      html = html.replace(/^#{1,6}\s+(.*)$/gm, "<strong>$1</strong>");
+
+      // Bold text
       html = html.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+
+      // Links
       html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>');
+
+      // List items
       html = html.replace(/^\* (.*$)/gm, "<li>$1</li>");
       html = html.replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, "<ul>$1</ul>");
+
+      // Line breaks
       html = html.replace(/\n/g, "<br>");
+
       return html;
     }
 
